@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Donkey</title>
+
+    <style type="text/css">
+        body {
+            position: relative;
+        }
+
+        .jumbotron {
+            background: url("./awsugid.jpeg") no-repeat right center;
+            background-color: transparent !important;
+            background-size: 50%;
+        }
+
+        #topicMetricChart {
+            height: 300px;
+        }
+    </style>
+
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="index.js" defer></script>
+</head>
+
+    <body data-spy="scroll" data-target="#navList">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="offset-3 col-sm-6">
+
+                    <div class="jumbotron">
+                        <h1 class="display-4">Hello, world!</h1>
+                        <p class="lead">Subscribe yah.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+
+                    <div class="card sticky-top">
+                        <h5 class="card-header">
+                            Navigation
+                        </h5>
+                        <div class="card-body">
+
+                            <div id="navList" class="list-group">
+                                <a class="list-group-item list-group-item-action" href="#card1">Subscribe</a>
+                                <a class="list-group-item list-group-item-action" href="#card2">Check Subscriptions</a>
+                                <a class="list-group-item list-group-item-action" href="#card3">Topic Metrics</a>
+                                <a class="list-group-item list-group-item-action" href="#card4">Messages List</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            <div id="card1" class="card">
+                                <h5 class="card-header">
+                                    Subscribe
+                                </h5>
+                                <div class="card-body">
+
+                                    <div>
+                                        <ol>
+                                            <li>Pilih topik (Ctrl + click untuk memilih lebih dari 1)</li>
+                                            <li>Masukan email</li>
+                                            <li>Klik "Subscribe"</li>
+                                        </ol>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="d-flex justify-content-between">
+                                            <label for="topicSelector" class="font-weight-bold">Topic</label>
+                                            <button id="refreshButton" type="button" class="btn btn-link">Refresh</button>
+                                        </div>
+                                        <select multiple class="form-control" id="topicSelector"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailInput" class="font-weight-bold">Email</label>
+                                        <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="text-right"><button id="subscribeButton" type="button" class="btn btn-primary">Subscribe</button></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-sm-12">
+
+                            <div id="card2" class="card">
+                                <h5 class="card-header">
+                                    Check Subscriptions
+                                </h5>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label for="emailToCheckInput" class="font-weight-bold">Email</label>
+
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" id="emailToCheckInput" aria-describedby="emailHelp">
+                                            <div class="input-group-append">
+                                                <button id="checkButton" type="button" class="btn btn-primary">Check</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="topicsResult" class="font-weight-bold">Subscribed Topics</label>
+                                        <textarea readonly class="form-control bg-transparent" id="topicsResult" rows="3"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-sm-12">
+
+                            <div id="card3" class="card">
+                                <h5 class="card-header">
+                                    Topic Metrics
+                                </h5>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <div class="d-flex justify-content-between">
+                                            <label for="topicMetricList" class="font-weight-bold">Topics</label>
+                                            <button id="refreshTopicsMetricsButton" type="button" class="btn btn-link">Refresh</button>
+                                        </div>
+                                        <select class="form-control" id="topicMetricList"></select>
+                                    </div>
+
+                                    <div id="topicMetricChart" class="border rounded">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-5">
+                        <div class="col-sm-12">
+
+                            <div id="card4" class="card">
+                                <h5 class="card-header">
+                                    Messages List
+                                </h5>
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <div class="d-flex justify-content-between">
+                                            <label for="topicList" class="font-weight-bold">Topics</label>
+                                            <button id="refreshTopicsMessagesButton" type="button" class="btn btn-link">Refresh</button>
+                                        </div>
+                                        <select class="form-control" id="topicList"></select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="cronInfo" class="font-weight-bold">Cron</label>
+                                        <input readonly type="text" class="form-control bg-transparent" id="cronInfo" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="messagesResult" class="font-weight-bold">Messages</label>
+                                        <ul class="list-group" id="messagesResult">
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
